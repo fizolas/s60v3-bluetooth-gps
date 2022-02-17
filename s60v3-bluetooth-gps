@@ -1,0 +1,39 @@
+#!/bin/bash
+
+if [ $# -lt 1 ]; then 
+    echo "Give as a parameter the bluetooth name of the (paired) phone you wish to use as GPS"; exit 
+fi
+
+
+# exit tasks (when leaving through ctrl-C in gpsd)
+function ctrl_c() {
+    echo "Releasing rfcomm 0"
+    sudo rfcomm release 0 
+    echo "Deactivating bluetooth"
+    sudo rfkill block bluetooth 
+    exit
+}
+
+echo -n "Getting bluetooth address of $1: "
+tmp=$(bluetoothctl paired-devices|grep $1)
+tmp=${tmp#Device }
+bt_address=${tmp%" $1"}
+echo $bt_address
+echo "Activating bluetooth"
+sudo rfkill unblock bluetooth 
+echo -n "Getting GPS channel: " 
+bt_channel=""
+while [ "$bt_channel" == "" ]; do
+    tmp=$(sdptool browse "$bt_address"|grep -A 10 GPS|grep Channel) 
+    bt_channel=${tmp#*: } 
+done
+echo $bt_channel
+echo "Binding rfcomm0"
+sudo rfcomm bind 0 "$bt_address" "$bt_channel"
+echo "Disabling gpsd"
+sudo systemctl disable --now gpsd.socket
+trap ctrl_c SIGINT
+echo "Starting gpsd manually"
+sudo gpsd -N /dev/rfcomm0
+
+
