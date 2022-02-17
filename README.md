@@ -1,4 +1,4 @@
-Sharing GPS of s60v3 phone with computer running Debian 11 (Bullseye) through Bluetooth
+Sharing of GPS receiver from s60v3 phone with computer running Debian 11 (Bullseye) through Bluetooth
 
 Put s60v3-bluetooth-gps script in ~/bin or some other directory in the path, and make it executable (chmod +x s60v3-bluetooth-gps)
 
@@ -8,12 +8,12 @@ Pair your phone with your computer; set the computer as "authorised" in the blue
 
 Run "s60v3-bluetooth-gps phone_name" to tether the phone with bluetooth name "phone_name"
 
-Start GPS sharing in your phone, if you have not done so already (e.g. Symartic ExtGPS, which is a j2me app), remember to switch on Bluetooth on the phone
+Start sharing your GPS in your phone, if you have not done so already. You can do it by starting Symarctic ExtGPS, a J2ME app. Do not forget to switch on Bluetooth on the phone.
 
-You can now use Linux/Debina applications which recognise gpsd, such as cgps or foxtrotgps (both signs in Symartic ExtGPS will be green when there is a GPS lock and bluetooth connection)
+You can now use any Linux/Debian applications that recognise gpsd, such as cgps or foxtrotgps.
 
-Ctrl-C stops the tethering session leaving the system consistent
+The two circles in Symarctic ExtGPS will turn from red to green when there is both a GPS lock and an active bluetooth connection. Even if the phone is connected through bluetooth, the bluetooth circle only turns green when you are using cgps or foxtrogps
 
-Tethering works well with two different phones I've tried (E52, E72)
+Ctrl-C stops the session, leaving the system consistent
 
-Note: for the Evolution email client to work during tethering, set "Method to detect online state" to "base" in "Settings>Network Preferences"
+GPS sharing works well with two different phones I've tried (E52, E72)
