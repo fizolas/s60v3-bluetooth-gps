@@ -10,12 +10,12 @@ Run "s60v3-bluetooth-gps phone_name" to share the GPS receiver of the phone with
 
 Start sharing the GPS receiver in your phone, if you have not done so already: you can do it by running Symarctic ExtGPS, a J2ME app (do not forget to switch on Bluetooth on the phone)
 
-You can now use any Linux/Debian applications that recognise gpsd, such as cgps or foxtrotgps.
+You can now use any Linux/Debian applications that recognises gpsd, such as foxtrotgps (maps, tracks), navit (car navigation) or cgps (GPS data).
 
-The two circles in Symarctic ExtGPS will turn from red to green when there is both a GPS lock and an active bluetooth connection. Even if the phone is connected through bluetooth, the bluetooth circle only turns green when you are using cgps or foxtrogps
+The two circles in Symarctic ExtGPS will turn from red to green when there is both a GPS fix and an active bluetooth connection (note: even if the phone is connected to the computer, the bluetooth circle only turns green when you are running a gpsd application)
 
 Ctrl-C stops the session, leaving the system consistent
 
 GPS sharing works well with two different phones I've tried (E52, E72)
 
-You can simultaneously have in your computer a tethered internet connection (using the s60v3-tether script in a separate terminal) and GPS from the same phone through bluetooth, as different rfcomm devices are used in s60v3-tether and s60v3-bluetooth-gps
+You can simultaneously have a tethered internet connection (using the s60v3-tether script in a separate terminal) and GPS from the same phone through bluetooth in your computer, as different rfcomm devices are used in the s60v3-tether and s60v3-bluetooth-gps scripts
