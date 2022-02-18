@@ -17,3 +17,5 @@ The two circles in Symarctic ExtGPS will turn from red to green when there is bo
 Ctrl-C stops the session, leaving the system consistent
 
 GPS sharing works well with two different phones I've tried (E52, E72)
+
+You can simultaneously have an internet connection (using s60v3-tether in a separate terminal) and GPS from the same phone through bluetooth, as different rfcomm ports are used
