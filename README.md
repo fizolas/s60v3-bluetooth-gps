@@ -8,7 +8,7 @@ Pair your phone with your computer; set the computer as "authorised" in the blue
 
 Run "s60v3-bluetooth-gps phone_name" to tether the phone with bluetooth name "phone_name"
 
-Start sharing your GPS in your phone, if you have not done so already. You can do it by starting Symarctic ExtGPS, a J2ME app. Do not forget to switch on Bluetooth on the phone.
+Start sharing your GPS in your phone, if you have not done so already: you can do it by starting Symarctic ExtGPS, a J2ME app (do not forget to switch on Bluetooth on the phone)
 
 You can now use any Linux/Debian applications that recognise gpsd, such as cgps or foxtrotgps.
 
