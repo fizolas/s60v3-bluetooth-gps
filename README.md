@@ -6,7 +6,7 @@ Put yourself in the sudoers group: e.g. for user john: "usermod -aG sudo john" (
 
 Pair your phone with your computer; set the computer as "authorised" in the bluetooth menu of the phone
 
-Run "s60v3-bluetooth-gps phone_name" to tether the phone with bluetooth name "phone_name"
+Run "s60v3-bluetooth-gps phone_name" to share the GPS receiver of the phone with bluetooth name "phone_name"
 
 Start sharing your GPS in your phone, if you have not done so already: you can do it by starting Symarctic ExtGPS, a J2ME app (do not forget to switch on Bluetooth on the phone)
 
