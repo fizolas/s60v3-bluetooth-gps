@@ -10,6 +10,7 @@ function deactivate_bt() {
 	echo "Deactivating bluetooth"
 	sudo rfkill block bluetooth
     fi
+    exit
 }
 
 # exit tasks (when leaving through ctrl-C in gpsd)
