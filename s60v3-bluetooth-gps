@@ -7,8 +7,14 @@ fi
 
 # exit tasks (when leaving through ctrl-C in gpsd)
 function ctrl_c() {
-    echo "Releasing rfcomm 0"
-    sudo rfcomm release 0 
+    echo "Releasing rfcomm 1"
+    sudo rfcomm release 1
+    echo "Deactivating bluetooth"
+    sudo rfkill block bluetooth 
+    exit
+}
+
+function ctrl_c0() {
     echo "Deactivating bluetooth"
     sudo rfkill block bluetooth 
     exit
@@ -20,7 +26,8 @@ tmp=${tmp#Device }
 bt_address=${tmp%" $1"}
 echo $bt_address
 echo "Activating bluetooth"
-sudo rfkill unblock bluetooth 
+sudo rfkill unblock bluetooth
+trap ctrl_c0 SIGINT
 echo -n "Getting GPS channel: " 
 bt_channel=""
 while [ "$bt_channel" == "" ]; do
@@ -28,12 +35,12 @@ while [ "$bt_channel" == "" ]; do
     bt_channel=${tmp#*: } 
 done
 echo $bt_channel
-echo "Binding rfcomm0"
-sudo rfcomm bind 0 "$bt_address" "$bt_channel"
+echo "Binding rfcomm 1 to $bt_address/$bt_channel"
+sudo rfcomm bind 1 "$bt_address" "$bt_channel"
 echo "Disabling gpsd"
 sudo systemctl disable --now gpsd.socket
 trap ctrl_c SIGINT
-echo "Starting gpsd manually"
-sudo gpsd -N /dev/rfcomm0
+echo "Starting gpsd manually (CTRL-C to finish)"
+sudo gpsd -N /dev/rfcomm1
 
 
