@@ -1,4 +1,4 @@
-Sharing of GPS receiver from s60v3 phone with computer running Debian 11 (Bullseye) through Bluetooth
+Sharing built-in GPS receiver in s60v3 phone with computer running Debian 11 (Bullseye) through Bluetooth
 
 Put the s60v3-bluetooth-gps script in ~/bin or some other directory in the path, and make it executable (chmod +x s60v3-bluetooth-gps)
 
