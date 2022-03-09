@@ -8,7 +8,7 @@ Pair your phone with your computer; set the computer as "authorised" in the blue
 
 Run "s60v3-bluetooth-gps phone_name" in a terminal to share the GPS receiver of the phone with bluetooth name "phone_name"
 
-Start sharing the GPS receiver in your phone, if you have not done so already: you can do it by running Symarctic ExtGPS, a J2ME app (do not forget to switch on Bluetooth on the phone)
+Start sharing the GPS receiver in your phone, if you have not done so already: you can do it by running <a href="https://phoneky.com/java-software/?id=a9a18552">Symarctic ExtGPS</a>, a J2ME app (do not forget to switch on Bluetooth on the phone)
 
 You can now use any Linux/Debian application which recognises gpsd, such as <a href="https://www.foxtrotgps.org">foxtrotgps</a> (maps, tracks), <a href="https://www.navit-project.org">navit</a> (car navigation) or <a href="https://manpages.debian.org/bullseye/gpsd-tools/cgps.1.en.html">cgps</a> (GPS data)
 
