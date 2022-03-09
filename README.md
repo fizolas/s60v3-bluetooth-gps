@@ -18,4 +18,4 @@ Ctrl-C stops the session, leaving the system consistent
 
 GPS sharing works well with two different phones I've tried (E52, E72)
 
-You can simultaneously have a tethered internet connection (using the s60v3-tether script in a separate terminal) and GPS from the same phone through bluetooth in your computer, as different rfcomm devices are used in the s60v3-tether and s60v3-bluetooth-gps scripts
+You can simultaneously have a tethered internet connection (using the <a href="https://github.com/fizolas/s60v3-tether">s60v3-tether</a> script in a separate terminal) and GPS from the same phone through bluetooth in your computer, as different rfcomm devices are used in the s60v3-tether and s60v3-bluetooth-gps scripts
