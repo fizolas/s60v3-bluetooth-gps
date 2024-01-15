@@ -1,12 +1,19 @@
 #!/bin/bash
 
+rfc_channel=1 # choose rfcomm channel to be used
+              # (it must not be the same as in /etc/wvdial.conf)
+devrfcomm="/dev/rfcomm$rfc_channel"
+
+echo "Using $devrfcomm"
+
 if [ $# -lt 1 ]; then 
     echo "Give as a parameter the bluetooth name of the (paired) phone you wish to use as GPS"; exit 
 fi
 
 function deactivate_bt() {
-    tmp=$(ls /dev/rfcomm0 2> /dev/null);
+    tmp=$(ls /dev/rfcomm0 2> /dev/null); # 0 and not 1, as typically used with tether
     if [ -z "$tmp" ]; then
+	echo ""
 	echo "Deactivating bluetooth"
 	sudo rfkill block bluetooth
     fi
@@ -15,15 +22,21 @@ function deactivate_bt() {
 
 # exit tasks (when leaving through ctrl-C in gpsd)
 function ctrl_c() {
-    echo "Releasing rfcomm 1"
-    sudo rfcomm release 1
+    echo "Releasing rfcomm $rfc_channel"
+    sudo rfcomm release "$rfc_channel"
     deactivate_bt
     exit
 }
 
 echo -n "Getting bluetooth address of $1: "
-tmp=$(bluetoothctl paired-devices|grep $1)
+#tmp=$(bluetoothctl paired-devices|grep $1)
+tmp=$(bluetoothctl devices Paired|grep $1)
 tmp=${tmp#Device }
+if [ "$tmp" == "" ]
+then 
+    echo "device not paired"
+    exit
+fi
 bt_address=${tmp%" $1"}
 echo $bt_address
 echo "Activating bluetooth"
@@ -36,8 +49,8 @@ while [ "$bt_channel" == "" ]; do
     bt_channel=${tmp#*: } 
 done
 echo $bt_channel
-echo "Binding rfcomm 1 to $bt_address/$bt_channel"
-sudo rfcomm bind 1 "$bt_address" "$bt_channel"
+echo "Binding rfcomm $rfc_channel to $bt_address/$bt_channel"
+sudo rfcomm bind "$rfc_channel" "$bt_address" "$bt_channel"
 echo "Disabling gpsd"
 sudo systemctl disable --now gpsd.socket
 trap ctrl_c SIGINT
